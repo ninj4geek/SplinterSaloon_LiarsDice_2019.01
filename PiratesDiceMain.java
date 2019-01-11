@@ -2,21 +2,6 @@ import java.util.ArrayList;
 
 public class PiratesDiceMain {
     public static void main(String[] args) {
-
-        int diceCount = 5;
-        int playerCount = 3;
-
-        DiceCup player1 = new DiceCup(diceCount);
-        DiceCup player2 = new DiceCup(diceCount);
-
-        //player#Hand is the dice throw result
-        ArrayList <Integer> player1Hand;
-        ArrayList <Integer> player2Hand;
-
-        //player#sumBet shows qty of 1,2,3,4,5,6's thrown per cup
-        ArrayList <Integer> p1sumBet;
-        ArrayList <Integer> p2sumBet;
-
         //***********************Introduction and Rules*******************************//
 //        System.out.println("\n\n******Arrr, this be Liar's Dice******");
 //        System.out.println("\n\nEach player will receive 5 dice");
@@ -35,14 +20,26 @@ public class PiratesDiceMain {
 //        System.out.println("\n\nLast one with dice wins.\n\n");
 //
 //        System.out.println("Player 1 is you, Player 2 is the computer. ");
+        int diceCount = 5;
+        int playerCount = 3;
 
+        DiceCup player1 = new DiceCup(diceCount);
+        DiceCup player2 = new DiceCup(diceCount);
 
-        //Main gameplay loop
+        //player#Hand is the dice throw result
+        ArrayList <Integer> player1Hand;
+        ArrayList <Integer> player2Hand;
+
+        //player#sumBet shows qty of 1,2,3,4,5,6's thrown per cup
+        ArrayList <Integer> p1sumBet;
+        ArrayList <Integer> p2sumBet;
+
+       //Main gameplay loop
        while (playerCount > 1){
 
            //throw dice
            player1Hand = player1.throwDice(player1.getDiceCount());
-           System.out.println(player1Hand);
+           System.out.println("\n\nnew roll \n"+player1Hand);
 
            p1sumBet = player1.sumBet(player1Hand);
            System.out.println(p1sumBet+"\n\n");
