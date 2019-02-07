@@ -6,26 +6,26 @@ public class DiceCup {
 
     private ArrayList<Integer> diceRolls = new ArrayList<>();
     private ArrayList<Integer> cupDiceTotal = new ArrayList<>();
-    private ArrayList<Integer> allDiceCupsTotal= new ArrayList<>();
+    private ArrayList<Integer> allDiceCupsTotal = new ArrayList<>();
 
     private boolean firstThrow = true;
     private boolean boolGainedDie = false;
     private boolean boolLostDie = false;
 
-
-    public DiceCup(int diceCount){
+    public DiceCup(int diceCount) {
         this.diceCount = diceCount;
 
-        for (int i = 0; i < 6; i++){
-            cupDiceTotal.add(i,0);
+        for (int i = 0; i < 6; i++) {
+            cupDiceTotal.add(i, 0);
         }
-        for (int i = 0; i < 6; i++){
-            allDiceCupsTotal.add(i,0);
+
+        for (int i = 0; i < 6; i++) {
+            allDiceCupsTotal.add(i, 0);
         }
     }
 
 
-    public ArrayList<Integer> throwDice(int diceCount){
+    public ArrayList<Integer> throwDice(int diceCount) {
         ArrayList<Integer> diceRolls1 = this.diceRolls;
 
         if (firstThrow) {
@@ -34,16 +34,16 @@ public class DiceCup {
             }
             firstThrow = false;
         }
-        if (boolLostDie){
+        if (boolLostDie) {
             diceRolls1.remove(String.valueOf(diceRolls1.size()).length());
         }
-        if (boolGainedDie){
+        if (boolGainedDie) {
             diceRolls1.add(0);
         }
-        for (int i = 0; i < diceCount; i++){
+        for (int i = 0; i < diceCount; i++) {
             double temp = Math.random();
             temp = (temp * 6) + 1;
-            int dieValue = (int)(temp);
+            int dieValue = (int) (temp);
             diceRolls1.set(i, dieValue);
         }
 
@@ -53,69 +53,65 @@ public class DiceCup {
     }
 
 
-    public ArrayList<Integer> getDiceRolls(){
+    public ArrayList<Integer> getDiceRolls() {
         return diceRolls;
     }
 
-    public int getDiceCount(){
+    public int getDiceCount() {
         return diceCount;
     }
 
-    public void setDiceCount(int newDiceCount){
+    public void setDiceCount(int newDiceCount) {
         diceCount = newDiceCount;
     }
 
-    public ArrayList<Integer> sumBet(ArrayList diceRolls){
+    public ArrayList<Integer> sumBet(ArrayList diceRolls) {
         resetArray(cupDiceTotal);
-        for (int i = 0; i < diceRolls.size(); i++){
-            for (int j = 1; j <= 6; j++){
-                int dieValue = (int)(diceRolls.get(i));
-                if (dieValue == j){
+        for (int i = 0; i < diceRolls.size(); i++) {
+            for (int j = 1; j <= 6; j++) {
+                int dieValue = (int) (diceRolls.get(i));
+                if (dieValue == j) {
                     //get item, set to temp, add, set back in array
-                    int temp = cupDiceTotal.get(j-1);
+                    int temp = cupDiceTotal.get(j - 1);
                     temp += 1;
-                    cupDiceTotal.set(j-1, temp);
+                    cupDiceTotal.set(j - 1, temp);
                 }
             }
         }
         return cupDiceTotal;
     }
 
-    public ArrayList<Integer> sumDiceCups(ArrayList p1sumBet, ArrayList p2sumBet){
-        for (int i = 0; i < 6; i++){
-            int x = (int)(p1sumBet.get(i));
-            for (int j = i; j <= i; j++){
-                int y = (int)(p2sumBet.get(j));
+    public ArrayList<Integer> sumDiceCups(ArrayList p1sumBet, ArrayList p2sumBet) {
+        for (int i = 0; i < 6; i++) {
+            int x = (int) (p1sumBet.get(i));
+            for (int j = i; j <= i; j++) {
+                int y = (int) (p2sumBet.get(j));
                 int sum = x + y;
-                allDiceCupsTotal.set(i,sum);
+                allDiceCupsTotal.set(i, sum);
             }
         }
         return allDiceCupsTotal;
     }
 
-
-    public boolean diceMinus(int diceLost){
+    public boolean diceMinus(int diceLost) {
         int temp = getDiceCount();
         temp = temp - diceLost;
         setDiceCount(temp);
-        System.out.println("Current Dice Count: "+getDiceCount());
         return boolLostDie = true;
     }
 
-
-    public boolean dicePlus(int additionalDice){
+    public boolean dicePlus(int additionalDice) {
         int temp = diceCount;
         temp = temp + additionalDice;
         setDiceCount(temp);
-        System.out.println("Current Dice Count: "+getDiceCount());
         return boolGainedDie = true;
-
     }
 
-
-    public void resetArray(ArrayList arraylist){
-        for (int i = 0; i < arraylist.size(); i++){
-            arraylist.set(i,0);
+    public void resetArray(ArrayList arraylist) {
+        for (int i = 0; i < arraylist.size(); i++) {
+            arraylist.set(i, 0);
         }
     }
+
+
 }
